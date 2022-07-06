@@ -1,2 +1,4 @@
-package com.html.cgmaker.web.chat;public class ChatController {
+package com.html.cgmaker.web.chat;
+
+public class ChatController {
 }
