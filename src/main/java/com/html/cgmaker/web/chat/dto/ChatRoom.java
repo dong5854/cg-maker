@@ -1,4 +1,4 @@
-package com.html.cgmaker.web.chat;
+package com.html.cgmaker.web.chat.dto;
 
 import com.html.cgmaker.domain.chat.ChatService;
 import lombok.Builder;
@@ -7,23 +7,23 @@ import org.springframework.web.socket.WebSocketSession;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ChatRoomDto {
+public class ChatRoom {
     private String roomId;
     private String name;
     private Set<WebSocketSession> sessions = new HashSet<>();
 
     @Builder
-    public ChatRoomDto(String roomId, String name){
+    public ChatRoom(String roomId, String name){
         this.roomId = roomId;
         this.name =name;
     }
 
-    public void handleActions(WebSocketSession session, ChatMesssageDto chatMesssageDto, ChatService chatService){
-        if (chatMesssageDto.getType().equals(ChatMesssageDto.MessageType.ENTER)){
+    public void handleActions(WebSocketSession session, ChatMessage chatMessage, ChatService chatService){
+        if (chatMessage.getType().equals(ChatMessage.MessageType.ENTER)){
             sessions.add(session);
-            chatMesssageDto.setMessage(chatMesssageDto.getSender() + "님이 입장하셨습니다.");
+            chatMessage.setMessage(chatMessage.getSender() + "님이 입장하셨습니다.");
         }
-        sendMessage(chatMesssageDto, chatService);
+        sendMessage(chatMessage, chatService);
     }
 
     public <T> void sendMessage(T message, ChatService chatService){

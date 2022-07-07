@@ -1,11 +1,11 @@
-package com.html.cgmaker.web.chat;
+package com.html.cgmaker.web.chat.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ChatMesssageDto {
+public class ChatMessage {
     // 메시지 타입 : 입장, 대화
     public enum MessageType {
         ENTER, TALK
