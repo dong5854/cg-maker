@@ -1,8 +1,9 @@
-package com.html.cgmaker.config;
+package com.html.cgmaker.web.chat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.html.cgmaker.domain.chat.ChatService;
 import com.html.cgmaker.web.chat.dto.ChatMessage;
+import com.html.cgmaker.web.chat.dto.ChatRoom;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -22,5 +23,7 @@ public class WebSocketHandler extends TextWebSocketHandler {
         String payload = message.getPayload();
         log.info("payload {}", payload);
         ChatMessage chatMessage = objectMapper.readValue(payload,ChatMessage.class);
+        ChatRoom room = chatService.findRoomById(chatMessage.getRoomId());
+        room.handleActions(session, chatMessage, chatService);
     }
 }
