@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.*;
 
@@ -19,7 +20,7 @@ public class ChatServiceImpl implements ChatService{
     private final ObjectMapper objectMapper;
     private Map<String, ChatRoom> chatRooms;
 
-    @Override
+    @PostConstruct @Override
     public void init() {
         chatRooms = new LinkedHashMap<>();
     }
