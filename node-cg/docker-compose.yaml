@@ -1,0 +1,13 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  node-cg:
+    image: node-cg
+    ports:
+      - "9090:9090"
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    restart: on-failure
+    volumes:
+      - ~/javaproject/cg-maker/node-cg/nodecg:/usr/src/nodecg:rw
+    command: ['node', 'index.js']
